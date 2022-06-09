@@ -1,0 +1,191 @@
+2022-06-09 22:08:25.698771 [info]: deal with the client(127.0.0.1)
+2022-06-09 22:08:25.698872 [info]: adjust timer once
+2022-06-09 22:08:25.698921 [info]: GET / HTTP/1.1
+2022-06-09 22:08:25.698964 [info]: Host: 127.0.0.1:9006
+2022-06-09 22:08:25.698981 [info]: Connection: keep-alive
+2022-06-09 22:08:25.698993 [info]: Cache-Control: max-age=0
+2022-06-09 22:08:25.699006 [info]: oop!unknow header: Cache-Control: max-age=0
+2022-06-09 22:08:25.699018 [info]: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:25.699029 [info]: oop!unknow header: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:25.699040 [info]: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:25.699055 [info]: oop!unknow header: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:25.699070 [info]: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:25.699084 [info]: oop!unknow header: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:25.699095 [info]: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:25.699108 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:25.699119 [info]: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:25.699129 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:25.699143 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:25.699155 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:25.699166 [info]: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:25.699177 [info]: oop!unknow header: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:25.699188 [info]: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:25.699201 [info]: oop!unknow header: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:25.699213 [info]: Sec-Fetch-User: ?1
+2022-06-09 22:08:25.699226 [info]: oop!unknow header: Sec-Fetch-User: ?1
+2022-06-09 22:08:25.699235 [info]: Sec-Fetch-Dest: document
+2022-06-09 22:08:25.699244 [info]: oop!unknow header: Sec-Fetch-Dest: document
+2022-06-09 22:08:25.699254 [info]: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:25.699263 [info]: oop!unknow header: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:25.699271 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:25.699280 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:25.699287 [info]: 
+2022-06-09 22:08:26.692376 [info]: deal with the client(127.0.0.1)
+2022-06-09 22:08:26.692440 [info]: adjust timer once
+2022-06-09 22:08:26.692506 [info]: GET / HTTP/1.1
+2022-06-09 22:08:26.692572 [info]: Host: 127.0.0.1:9006
+2022-06-09 22:08:26.692584 [info]: Connection: keep-alive
+2022-06-09 22:08:26.692593 [info]: Cache-Control: max-age=0
+2022-06-09 22:08:26.692602 [info]: oop!unknow header: Cache-Control: max-age=0
+2022-06-09 22:08:26.692611 [info]: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:26.692619 [info]: oop!unknow header: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:26.692640 [info]: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:26.692649 [info]: oop!unknow header: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:26.692657 [info]: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:26.692666 [info]: oop!unknow header: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:26.692679 [info]: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:26.692687 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:26.692696 [info]: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:26.692710 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:26.692733 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:26.692745 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:26.692754 [info]: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:26.692763 [info]: oop!unknow header: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:26.692771 [info]: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:26.692780 [info]: oop!unknow header: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:26.692788 [info]: Sec-Fetch-User: ?1
+2022-06-09 22:08:26.692797 [info]: oop!unknow header: Sec-Fetch-User: ?1
+2022-06-09 22:08:26.692805 [info]: Sec-Fetch-Dest: document
+2022-06-09 22:08:26.692813 [info]: oop!unknow header: Sec-Fetch-Dest: document
+2022-06-09 22:08:26.692821 [info]: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:26.692829 [info]: oop!unknow header: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:26.692838 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:26.692846 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:26.692855 [info]: 
+2022-06-09 22:08:27.091147 [info]: deal with the client(127.0.0.1)
+2022-06-09 22:08:27.091208 [info]: adjust timer once
+2022-06-09 22:08:27.091244 [info]: GET / HTTP/1.1
+2022-06-09 22:08:27.091310 [info]: Host: 127.0.0.1:9006
+2022-06-09 22:08:27.091321 [info]: Connection: keep-alive
+2022-06-09 22:08:27.091331 [info]: Cache-Control: max-age=0
+2022-06-09 22:08:27.091340 [info]: oop!unknow header: Cache-Control: max-age=0
+2022-06-09 22:08:27.091350 [info]: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:27.091359 [info]: oop!unknow header: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:27.091369 [info]: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:27.091377 [info]: oop!unknow header: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:27.091386 [info]: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:27.091396 [info]: oop!unknow header: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:27.091405 [info]: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:27.091414 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:27.091423 [info]: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:27.091432 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:27.091442 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:27.091450 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:27.091481 [info]: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:27.091497 [info]: oop!unknow header: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:27.091508 [info]: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:27.091521 [info]: oop!unknow header: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:27.091583 [info]: Sec-Fetch-User: ?1
+2022-06-09 22:08:27.091592 [info]: oop!unknow header: Sec-Fetch-User: ?1
+2022-06-09 22:08:27.091601 [info]: Sec-Fetch-Dest: document
+2022-06-09 22:08:27.091609 [info]: oop!unknow header: Sec-Fetch-Dest: document
+2022-06-09 22:08:27.091618 [info]: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:27.091626 [info]: oop!unknow header: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:27.091635 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:27.091644 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:27.091664 [info]: 
+2022-06-09 22:08:27.671816 [info]: deal with the client(127.0.0.1)
+2022-06-09 22:08:27.671897 [info]: adjust timer once
+2022-06-09 22:08:27.671946 [info]: GET / HTTP/1.1
+2022-06-09 22:08:27.672018 [info]: Host: 127.0.0.1:9006
+2022-06-09 22:08:27.672031 [info]: Connection: keep-alive
+2022-06-09 22:08:27.672042 [info]: Cache-Control: max-age=0
+2022-06-09 22:08:27.672052 [info]: oop!unknow header: Cache-Control: max-age=0
+2022-06-09 22:08:27.672063 [info]: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:27.672072 [info]: oop!unknow header: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:27.672083 [info]: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:27.672092 [info]: oop!unknow header: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:27.672103 [info]: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:27.672113 [info]: oop!unknow header: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:27.672123 [info]: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:27.672132 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:27.672143 [info]: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:27.672154 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:27.672166 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:27.672175 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:27.672185 [info]: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:27.672195 [info]: oop!unknow header: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:27.672204 [info]: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:27.672214 [info]: oop!unknow header: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:27.672224 [info]: Sec-Fetch-User: ?1
+2022-06-09 22:08:27.672232 [info]: oop!unknow header: Sec-Fetch-User: ?1
+2022-06-09 22:08:27.672245 [info]: Sec-Fetch-Dest: document
+2022-06-09 22:08:27.672254 [info]: oop!unknow header: Sec-Fetch-Dest: document
+2022-06-09 22:08:27.672265 [info]: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:27.672275 [info]: oop!unknow header: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:27.672285 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:27.672295 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:27.672304 [info]: 
+2022-06-09 22:08:27.849045 [info]: deal with the client(127.0.0.1)
+2022-06-09 22:08:27.849101 [info]: adjust timer once
+2022-06-09 22:08:27.849146 [info]: GET / HTTP/1.1
+2022-06-09 22:08:27.849204 [info]: Host: 127.0.0.1:9006
+2022-06-09 22:08:27.849216 [info]: Connection: keep-alive
+2022-06-09 22:08:27.849224 [info]: Cache-Control: max-age=0
+2022-06-09 22:08:27.849232 [info]: oop!unknow header: Cache-Control: max-age=0
+2022-06-09 22:08:27.849242 [info]: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:27.849250 [info]: oop!unknow header: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:27.849261 [info]: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:27.849269 [info]: oop!unknow header: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:27.849277 [info]: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:27.849285 [info]: oop!unknow header: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:27.849293 [info]: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:27.849301 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:27.849309 [info]: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:27.849328 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:27.849339 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:27.849347 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:27.849356 [info]: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:27.849365 [info]: oop!unknow header: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:27.849374 [info]: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:27.849383 [info]: oop!unknow header: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:27.849393 [info]: Sec-Fetch-User: ?1
+2022-06-09 22:08:27.849402 [info]: oop!unknow header: Sec-Fetch-User: ?1
+2022-06-09 22:08:27.849411 [info]: Sec-Fetch-Dest: document
+2022-06-09 22:08:27.849419 [info]: oop!unknow header: Sec-Fetch-Dest: document
+2022-06-09 22:08:27.849428 [info]: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:27.849436 [info]: oop!unknow header: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:27.849446 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:27.849453 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:27.849462 [info]: 
+2022-06-09 22:08:28.144779 [info]: timer tick
+2022-06-09 22:08:28.874383 [info]: deal with the client(127.0.0.1)
+2022-06-09 22:08:28.874433 [info]: adjust timer once
+2022-06-09 22:08:28.874466 [info]: GET / HTTP/1.1
+2022-06-09 22:08:28.874502 [info]: Host: 127.0.0.1:9006
+2022-06-09 22:08:28.874507 [info]: Connection: keep-alive
+2022-06-09 22:08:28.874512 [info]: Cache-Control: max-age=0
+2022-06-09 22:08:28.874516 [info]: oop!unknow header: Cache-Control: max-age=0
+2022-06-09 22:08:28.874520 [info]: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:28.874525 [info]: oop!unknow header: sec-ch-ua: " Not A;Brand";v="99", "Chromium";v="96", "Google Chrome";v="96"
+2022-06-09 22:08:28.874530 [info]: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:28.874534 [info]: oop!unknow header: sec-ch-ua-mobile: ?0
+2022-06-09 22:08:28.874539 [info]: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:28.874543 [info]: oop!unknow header: sec-ch-ua-platform: "Linux"
+2022-06-09 22:08:28.874546 [info]: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:28.874550 [info]: oop!unknow header: Upgrade-Insecure-Requests: 1
+2022-06-09 22:08:28.874555 [info]: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:28.874559 [info]: oop!unknow header: User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36
+2022-06-09 22:08:28.874563 [info]: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:28.874567 [info]: oop!unknow header: Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+2022-06-09 22:08:28.874571 [info]: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:28.874576 [info]: oop!unknow header: Sec-Fetch-Site: cross-site
+2022-06-09 22:08:28.874581 [info]: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:28.874585 [info]: oop!unknow header: Sec-Fetch-Mode: navigate
+2022-06-09 22:08:28.874590 [info]: Sec-Fetch-Dest: document
+2022-06-09 22:08:28.874595 [info]: oop!unknow header: Sec-Fetch-Dest: document
+2022-06-09 22:08:28.874599 [info]: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:28.874604 [info]: oop!unknow header: Accept-Encoding: gzip, deflate, br
+2022-06-09 22:08:28.874609 [info]: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:28.874621 [info]: oop!unknow header: Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7,en-US;q=0.6,zh-HK;q=0.5
+2022-06-09 22:08:28.874626 [info]: 
