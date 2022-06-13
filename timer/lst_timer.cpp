@@ -145,14 +145,12 @@ void sort_timer_lst::add_timer(util_timer *timer, util_timer *lst_head)
     }
 }
 
-void Utils::init(int timeslot)
-{
+void Utils::init(int timeslot) {
     m_TIMESLOT = timeslot;
 }
 
 //对文件描述符设置非阻塞
-int Utils::setnonblocking(int fd)
-{
+int Utils::setnonblocking(int fd) {
     int old_option = fcntl(fd, F_GETFL);
     int new_option = old_option | O_NONBLOCK;
     fcntl(fd, F_SETFL, new_option);

@@ -1,5 +1,5 @@
-#ifndef LST_TIMER
-#define LST_TIMER
+#ifndef MIN_HEAP
+#define MIN_HEAP
 
 #include <unistd.h>
 #include <signal.h>
@@ -20,60 +20,64 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/uio.h>
-
+#include <iostream>
+#include <algorithm>
 #include <time.h>
 #include "../log/log.h"
+using std::exception;
+#define BUFFER_SIZE 64
 
-//连接资源结构体成员需要用到定时器类
-//需要前向声明
-class util_timer;
-//连接资源
-struct client_data {
-    //客户端socket地址
+
+class heap_timer;
+
+struct client_data{
     sockaddr_in address;
-    //socket文件描述符
     int sockfd;
-    //定时器
-    util_timer *timer;
+    char buff[BUFFER_SIZE];
+    heap_timer* timer;
 };
 
-class util_timer {
+class heap_timer {
 public:
-    util_timer() : prev(NULL), next(NULL) {}
-
+    heap_timer(int delay) {
+        expire = time(nullptr) + delay;
+    }
 public:
     time_t expire;
-    
-    void (* cb_func)(client_data *);
-    client_data *user_data;
-    util_timer *prev;
-    util_timer *next;
+    void (*cb_func)(client_data*);
+    client_data* user_data;
 };
 
-class sort_timer_lst
-{
-public:
-    sort_timer_lst();
-    ~sort_timer_lst();
+void cb_func(client_data *user_data);
 
-    void add_timer(util_timer *timer);
-    void adjust_timer(util_timer *timer);
-    void del_timer(util_timer *timer);
+class time_heap {
+public:
+    time_heap(int cap);
+    time_heap(heap_timer** init_array, int size, int capacity);
+    ~time_heap();
+
+    void add_timer(heap_timer* timer);
+    void del_timer(heap_timer* timer);
+    heap_timer* top() const;
+    void pop_timer();
     void tick();
+    bool empty() const;
+private:
+    void heapify(int hole);
+    void resize();
 
 private:
-    void add_timer(util_timer *timer, util_timer *lst_head);
-
-    util_timer *head;
-    util_timer *tail;
+    heap_timer** array;
+    //时间堆的大小
+    int capacity; 
+    //当前有多少个定时器在时间堆中
+    int cur_size;
 };
 
-class Utils
-{
+class Utils {
 public:
     Utils() {}
-    ~Utils() {}
-
+    ~Utils() {} 
     void init(int timeslot);
 
     //对文件描述符设置非阻塞
@@ -85,21 +89,15 @@ public:
     //信号处理函数
     static void sig_handler(int sig);
 
-    //设置信号函数
-    void addsig(int sig, void(handler)(int), bool restart = true);
-
     //定时处理任务，重新定时以不断触发SIGALRM信号
     void timer_handler();
 
     void show_error(int connfd, const char *info);
-
 public:
     static int *u_pipefd;
-    sort_timer_lst m_timer_lst;
+    time_heap m_timer_heap(int cap);
     static int u_epollfd;
     int m_TIMESLOT;
 };
-
-void cb_func(client_data *user_data);
 
 #endif
