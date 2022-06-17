@@ -7,7 +7,7 @@ Config::Config(){
     //日志写入方式，默认同步
     LOGWrite = 0;
 
-    //触发组合模式,默认listenfd LT + connfd LT
+    //触发组合模式,默认listenfd LT + connfd LT,TRIGMode默认为最低效模式，可以改为1，实现服务器的最高性能，大概实现10wQPS
     TRIGMode = 0;
 
     //listenfd触发模式，默认LT

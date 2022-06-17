@@ -28,31 +28,45 @@ public:
     void init(int port , string user, string passWord, string databaseName,
               int log_write , int opt_linger, int trigmode, int sql_num,
               int thread_num, int close_log, int actor_model);
-
+    //线程池函数
     void thread_pool();
+    //数据库池函数
     void sql_pool();
     void log_write();
+    //更改模式  
     void trig_mode();
+    //创建lfd 
     void eventListen();
+    //当服务器非关闭状态 用于处理事件
     void eventLoop();
+    //定时器的操作
     void timer(int connfd, struct sockaddr_in client_address);
     void adjust_timer(util_timer *timer);
     void deal_timer(util_timer *timer, int sockfd);
+    //处理用户数据
     bool dealclinetdata();
+    //信号
     bool dealwithsignal(bool& timeout, bool& stop_server);
+    //读事件
     void dealwithread(int sockfd);
+    //写事件
     void dealwithwrite(int sockfd);
 
 public:
     //基础
+    //监听端口
     int m_port;
     char *m_root;
+    //日志
     int m_log_write;
     int m_close_log;
+    //触发模式
     int m_actormodel;
-
+    //进程通信模块
     int m_pipefd[2];
+    //epoll根
     int m_epollfd;
+    //用于接受用户连接
     http_conn *users;
 
     //数据库相关
@@ -69,11 +83,11 @@ public:
     //epoll_event相关
     epoll_event events[MAX_EVENT_NUMBER];
 
-    int m_listenfd;
+    int m_listenfd; //监听fd 申请一次
     int m_OPT_LINGER;
-    int m_TRIGMode;
-    int m_LISTENTrigmode;
-    int m_CONNTrigmode;
+    int m_TRIGMode; //触发模式 ET+LT LT+LT LT+ET  ET+ET 
+    int m_LISTENTrigmode;  // 监听 ET/LT
+    int m_CONNTrigmode;    // 连接 ET/LT
 
     //定时器相关
     client_data *users_timer;

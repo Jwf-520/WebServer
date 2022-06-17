@@ -45,7 +45,7 @@ m_max_requests(max_requests), m_threads(NULL),m_connPool(connPool) {
         throw std::exception();
     for (int i = 0; i < thread_number; ++i) {
         //循环创建线程，并将工作线程按要求进行运行
-        if (pthread_create(m_threads + i, NULL, worker, this) != 0) {
+        if (pthread_create(m_threads + i, NULL, worker, this) != 0) { //这个this会传给 worker的arg
             delete[] m_threads;
             throw std::exception();
         }
@@ -79,6 +79,8 @@ bool threadpool<T>::append(T *request, int state) {
     m_queuestat.post();
     return true;
 }
+//将“待办工作”加入到请求队列
+//传入的是fd
 template <typename T>
 bool threadpool<T>::append_p(T *request) {
     m_queuelocker.lock();
@@ -91,6 +93,7 @@ bool threadpool<T>::append_p(T *request) {
     m_queuestat.post();
     return true;
 }
+//线程回调函数/工作函数，arg其实是this
 template <typename T>
 void *threadpool<T>::worker(void *arg) {
     //将参数强转为线程池类，调用成员方法
@@ -98,6 +101,8 @@ void *threadpool<T>::worker(void *arg) {
     pool->run();
     return pool;
 }
+//回调函数会调用这个函数工作
+//工作线程就是不断地等任务队列有新任务，然后就加锁取任务->取到任务解锁->执行任务
 template <typename T>
 void threadpool<T>::run() {
     while (true) {

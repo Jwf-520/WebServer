@@ -100,12 +100,13 @@ void WebServer::thread_pool()
     m_pool = new threadpool<http_conn>(m_actormodel, m_connPool, m_thread_num);
 }
 
-void WebServer::eventListen()
-{
-    //网络编程基础步骤
+void WebServer::eventListen() {
+    //m_listenfd是一个全局变量
     m_listenfd = socket(PF_INET, SOCK_STREAM, 0);
+    //如果它的条件返回错误，则终止程序执行
     assert(m_listenfd >= 0);
 
+     //TCP连接断开的时候调用closesocket函数，有优雅的断开和强制断开两种方式
     //优雅关闭连接
     if (0 == m_OPT_LINGER)
     {
@@ -120,13 +121,18 @@ void WebServer::eventListen()
 
     int ret = 0;
     struct sockaddr_in address;
+    // bzero() 会将内存块（字符串）的前n个字节清零;
+    // s为内存（字符串）指针，n 为需要清零的字节数。
+    // 在网络编程中会经常用到。
     bzero(&address, sizeof(address));
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = htonl(INADDR_ANY);
     address.sin_port = htons(m_port);
 
     int flag = 1;
+    //允许重用本地地址和端口
     setsockopt(m_listenfd, SOL_SOCKET, SO_REUSEADDR, &flag, sizeof(flag));
+    //传统绑定步骤
     ret = bind(m_listenfd, (struct sockaddr *)&address, sizeof(address));
     assert(ret >= 0);
     ret = listen(m_listenfd, 5);
@@ -138,19 +144,24 @@ void WebServer::eventListen()
     epoll_event events[MAX_EVENT_NUMBER];
     m_epollfd = epoll_create(5);
     assert(m_epollfd != -1);
-
+    //将lfd上树
     utils.addfd(m_epollfd, m_listenfd, false, m_LISTENTrigmode);
     http_conn::m_epollfd = m_epollfd;
-
+    //创建管道套接字
     ret = socketpair(PF_UNIX, SOCK_STREAM, 0, m_pipefd);
     assert(ret != -1);
+    //设置管道写端为非阻塞，为什么写端要非阻塞？
+    //send是将信息发送给套接字缓冲区，如果缓冲区满了，则会阻塞，
+    //这时候会进一步增加信号处理函数的执行时间，为此，将其修改为非阻塞。(管道在内核缓冲区中)
     utils.setnonblocking(m_pipefd[1]);
+    //设置管道读端为ET非阻塞 统一事件源
     utils.addfd(m_epollfd, m_pipefd[0], false, 0);
 
     utils.addsig(SIGPIPE, SIG_IGN);
+    //传递给主循环的信号值，这里只关注SIGALRM和SIGTERM
     utils.addsig(SIGALRM, utils.sig_handler, false);
     utils.addsig(SIGTERM, utils.sig_handler, false);
-
+    //每隔TIMESLOT时间触发SIGALRM信号
     alarm(TIMESLOT);
 
     //工具类,信号和描述符基础操作
@@ -158,6 +169,11 @@ void WebServer::eventListen()
     Utils::u_epollfd = m_epollfd;
 }
 
+/*
+在accept得到cfd的时候。这时候通过timer函数不只是初始化了cfd的时间，而且整体初始化。
+也就是说，当前服务器已经认可了这一连接，完成了三次握手，并且得到了用户标识，允许传输数据。
+这里为了提升性能，给到了3倍阈值的超时。
+*/
 void WebServer::timer(int connfd, struct sockaddr_in client_address)
 {
     users[connfd].init(connfd, client_address, m_root, m_CONNTrigmode, m_close_log, m_user, m_passWord, m_databaseName);
@@ -201,6 +217,7 @@ bool WebServer::dealclinetdata()
 {
     struct sockaddr_in client_address;
     socklen_t client_addrlength = sizeof(client_address);
+    //LT
     if (0 == m_LISTENTrigmode)
     {
         int connfd = accept(m_listenfd, (struct sockaddr *)&client_address, &client_addrlength);
@@ -220,6 +237,7 @@ bool WebServer::dealclinetdata()
 
     else
     {
+        //ET
         while (1)
         {
             int connfd = accept(m_listenfd, (struct sockaddr *)&client_address, &client_addrlength);
@@ -246,6 +264,8 @@ bool WebServer::dealwithsignal(bool &timeout, bool &stop_server)
     int ret = 0;
     int sig;
     char signals[1024];
+    //从管道读端读出信号值，成功返回字节数，失败返回-1
+    //正常情况下，这里的ret返回值总是1，只有14和15两个ASCII码对应的字符
     ret = recv(m_pipefd[0], signals, sizeof(signals), 0);
     if (ret == -1)
     {
@@ -374,27 +394,25 @@ void WebServer::dealwithwrite(int sockfd)
     }
 }
 
-void WebServer::eventLoop()
-{
+void WebServer::eventLoop() {
     bool timeout = false;
     bool stop_server = false;
 
-    while (!stop_server)
-    {
+    while (!stop_server) {
+        //监测发生事件的文件描述符
         int number = epoll_wait(m_epollfd, events, MAX_EVENT_NUMBER, -1);
-        if (number < 0 && errno != EINTR)
-        {
+        if (number < 0 && errno != EINTR) {
             LOG_ERROR("%s", "epoll failure");
             break;
         }
-
-        for (int i = 0; i < number; i++)
-        {
+        /*
+            我们主要处理三种事件：io事件，信号，新的连接
+        */
+        for (int i = 0; i < number; i++) {
             int sockfd = events[i].data.fd;
 
             //处理新到的客户连接
-            if (sockfd == m_listenfd)
-            {
+            if (sockfd == m_listenfd) {
                 bool flag = dealclinetdata();
                 if (false == flag)
                     continue;
@@ -406,6 +424,9 @@ void WebServer::eventLoop()
                 deal_timer(timer, sockfd);
             }
             //处理信号
+            //管道读端对应文件描述符发生读事件
+            //因为统一了事件源，信号处理当成读事件来处理
+            //怎么统一？就是信号回调函数哪里不立即处理而是写到：pipe的写端
             else if ((sockfd == m_pipefd[0]) && (events[i].events & EPOLLIN))
             {
                 bool flag = dealwithsignal(timeout, stop_server);
