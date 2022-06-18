@@ -17,22 +17,20 @@ template <class T>
 class block_queue
 {
 public:
-    block_queue(int max_size = 1000)
-    {
-        if (max_size <= 0)
-        {
+    block_queue(int max_size = 1000) {
+        if (max_size <= 0) {
             exit(-1);
         }
 
         m_max_size = max_size;
+        //阻塞队列的string数组
         m_array = new T[max_size];
         m_size = 0;
         m_front = -1;
         m_back = -1;
     }
 
-    void clear()
-    {
+    void clear() {
         m_mutex.lock();
         m_size = 0;
         m_front = -1;
@@ -40,8 +38,7 @@ public:
         m_mutex.unlock();
     }
 
-    ~block_queue()
-    {
+    ~block_queue() {
         m_mutex.lock();
         if (m_array != NULL)
             delete [] m_array;
@@ -49,8 +46,7 @@ public:
         m_mutex.unlock();
     }
     //判断队列是否满了
-    bool full() 
-    {
+    bool full() {
         m_mutex.lock();
         if (m_size >= m_max_size)
         {
@@ -62,8 +58,7 @@ public:
         return false;
     }
     //判断队列是否为空
-    bool empty() 
-    {
+    bool empty() {
         m_mutex.lock();
         if (0 == m_size)
         {
@@ -74,11 +69,9 @@ public:
         return false;
     }
     //返回队首元素
-    bool front(T &value) 
-    {
+    bool front(T &value) {
         m_mutex.lock();
-        if (0 == m_size)
-        {
+        if (0 == m_size) {
             m_mutex.unlock();
             return false;
         }
@@ -87,11 +80,9 @@ public:
         return true;
     }
     //返回队尾元素
-    bool back(T &value) 
-    {
+    bool back(T &value) {
         m_mutex.lock();
-        if (0 == m_size)
-        {
+        if (0 == m_size) {
             m_mutex.unlock();
             return false;
         }
@@ -100,8 +91,7 @@ public:
         return true;
     }
 
-    int size() 
-    {
+    int size() {
         int tmp = 0;
 
         m_mutex.lock();
@@ -111,8 +101,7 @@ public:
         return tmp;
     }
 
-    int max_size()
-    {
+    int max_size() {
         int tmp = 0;
 
         m_mutex.lock();
@@ -148,7 +137,6 @@ public:
     //pop时,如果当前队列没有元素,将会等待条件变量
     bool pop(T &item)
     {
-
         m_mutex.lock();
         while (m_size <= 0)
         {

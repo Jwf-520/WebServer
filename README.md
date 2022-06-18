@@ -17,7 +17,7 @@ Linux下C++轻量级Web服务器
 
 框架
 -------------
-<div align=center><img src="./pic/webserver.png" height="600"/> </div>
+<div align=center><img src="./pic/webserver.png"/> </div>
 
 
 
@@ -35,7 +35,7 @@ Linux下C++轻量级Web服务器
 
 3、`http_conn`给到了一个入口的作用，通过等待信号量来进入到`http`类里写出的`process`函数完成对于事务的处理，意味着以上三步走之后，半同步/半反应堆的模式达成。左侧有嗷嗷待哺的线程，右侧有反应堆。
 
-<div align=center><img src="./pic/webserver2.png" height="600"/> </div>
+<div align=center><img src="./pic/webserver2.png" /> </div>
 
 ## HTTP部分
 
@@ -64,7 +64,7 @@ Linux下C++轻量级Web服务器
 + 当前字节既不是\r，也不是\n。
     + 表示接受的不完整，需要继续接受，返回LINE_OPEN。
     
-    <div align=center><img src="./pic/httpconn1.png" height="600"/> </div>
+    <div align=center><img src="./pic/httpconn1.png"/> </div>
 
 2. 主状态机:
    主状态机初始状态是CHECK_STATE_REQUESTLINE，通过调用从状态机来驱动主状态机，在主状态机进行解析前，从状态机已经将每一行的末尾\r\n符号改为\0\0，以便于主状态机直接取出对应字符串进行处理。
@@ -85,15 +85,11 @@ Linux下C++轻量级Web服务器
     + 仅用于解析POST请求，调用parse_content函数解析消息体。
     + 用于保存POST请求消息体，为后面的登陆和注册做准备。
 
-<div align=center><img src="./pic/httpconn3.png" height="600"/> </div>
+<div align=center><img src="./pic/httpconn3.png" /> </div>
 
 整体的HTTP解析流程图：
 
-<div align=center><img src="./pic/httpconn2.png" height="600"/> </div>
-
-
-
-
+<div align=center><img src="./pic/httpconn2.png" /> </div>
 
 ## 定时器部分
 
@@ -135,29 +131,36 @@ Linux下C++轻量级Web服务器
 
 （14） 项目中`TIMESLOT`值为5，`expire`初始值设置为 现有时间+3*`TIMESLOT`，每有读写事件发生，该通信`fd`对应的`expire`就加3个TIMESLOT，同时调整定时器链表类中该节点的位置，通过`util`类对象使用`adjust_timer`函数。
 
-Demo演示
-----------
+## 日志部分
 
-> * 注册演示
+日志的作用：有服务器创建，并记录运行状态，错误信息，访问数据的文件。
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1ge0iz0dkleg30m80bxjyj.gif" height="429"/> </div>
+**同步日志**：日志写入函数与工作线程串行执行，由于涉及到I/O操作，当单条日志比较大的时候，同步模式会阻塞整个处理流程，服务器所能处理的并发能力将有所下降，尤其是在峰值的时候，写日志可能成为系统的瓶颈。
 
-> * 登录演示
+**生产者-消费者模型**：并发编程中的经典模型。以多线程为例，为了实现线程间数据同步，生产者线程与消费者线程共享一个缓冲区，其中生产者线程往缓冲区中push消息，消费者线程从缓冲区中pop消息。
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1ge0izcc0r1g30m80bxn6a.gif" height="429"/> </div>
+**阻塞队列：**将生产者-消费者模型进行封装，使用循环数组实现队列，作为两者共享的缓冲区。
 
-> * 请求图片文件演示(6M)
+**异步日志**，将所写的日志内容先存入阻塞队列，写线程从阻塞队列中取出内容，写入日志。
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1ge0juxrnlfg30go07x4qr.gif" height="429"/> </div>
+**单例模式**，保证一个类只创建一个实例，同时提供全局访问的方法。
 
-> * 请求视频文件演示(39M)
+实现思路：私有化它的构造函数，以防止外界创建单例类的对象；使用类的私有静态指针变量指向类的唯一实例，并用一个公有的静态方法获取该实例。
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1ge0jtxie8ng30go07xb2b.gif" height="429"/> </div>
+懒汉模式(用到才初始化)和饿汉模式(一开始就进行初始化)
+
+<font size = 4>**异步日志的实现：**</font>
+
+使用循环数组模拟队列来存储日志，这个队列只是存储，真正的目的是要写到文件里，采用的异步IO就是先写到内存里，然后日志线程自己有空的时候写到文件里。
+
+关键实现：日志队列和写日志的线程。
+
+日志线程，这一部分也比较简单就是新建一个线程，这个线程不断while当日志队列有日志就从里面取出来写到文件去，这个过程记得加锁就行。
 
 
 压力测试
 -------------
-在关闭日志后，使用Webbench对服务器进行压力测试，对listenfd和connfd分别采用ET和LT模式，均可实现上万的并发连接，下面列出的是两者组合后的测试结果. 
+在关闭日志后，使用Webbench对服务器进行压力测试，对listenfd和connfd分别采用ET和LT模式，均可实现上万的并发连接，下面列出的是两者组合后的测试结果。
 
 > * Proactor，LT + LT，93251 QPS
 
@@ -297,15 +300,5 @@ Demo演示
 ```C++
 ./server -p 9007 -l 1 -m 0 -o 1 -s 10 -t 10 -c 1 -a 1
 ```
-
-- [x] 端口9007
-- [x] 异步写入日志
-- [x] 使用LT + LT组合
-- [x] 使用优雅关闭连接
-- [x] 数据库连接池内有10条连接
-- [x] 线程池内有10条线程
-- [x] 关闭日志
-
-
 **客户端的connect在三次握手的第二个次返回，而服务器端的accept在三次握手的第三次返回。**
 
