@@ -157,53 +157,43 @@ Linux下C++轻量级Web服务器
 
 日志线程，这一部分也比较简单就是新建一个线程，这个线程不断while当日志队列有日志就从里面取出来写到文件去，这个过程记得加锁就行。
 
+## 数据库连接池
+
+
+
 
 压力测试
 -------------
-在关闭日志后，使用Webbench对服务器进行压力测试，对listenfd和connfd分别采用ET和LT模式，均可实现上万的并发连接，下面列出的是两者组合后的测试结果。
+在关闭日志后，使用Webbench对服务器进行压力测试，对listenfd采用的LT，connfd采用ET，均可实现上千的并发连接，下面列出的是两者的测试结果。
 
-> * Proactor，LT + LT，93251 QPS
+> * Proactor
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1gfjqu2hptkj30gz07474n.jpg" height="201"/> </div>
+请求量：11450
 
-> * Proactor，LT + ET，97459 QPS
+<div align=center><img src="./pic/test1.png"/> </div>
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1gfjr1xppdgj30h206zdg6.jpg" height="201"/> </div>
+请求量：11945
 
-> * Proactor，ET + LT，80498 QPS
+<div align=center><img src="./pic/test2.png"/> </div>
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1gfjr24vmjtj30gz0720t3.jpg" height="201"/> </div>
+请求量：12016
 
-> * Proactor，ET + ET，92167 QPS
+<div align=center><img src="./pic/test3.png"/> </div>
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1gfjrflrebdj30gz06z0t3.jpg" height="201"/> </div>
+请求量：11559
 
-> * Reactor，LT + ET，69175 QPS
+<div align=center><img src="./pic/test4.png"/> </div>
 
-<div align=center><img src="http://ww1.sinaimg.cn/large/005TJ2c7ly1gfjr1humcbj30h207474n.jpg" height="201"/> </div>
+请求量：11656
 
-> * 并发连接总数：10500
+<div align=center><img src="./pic/test5.png"/> </div>
+
+> * 并发连接总数：9000
 > * 访问服务器时间：5s
+> * 平均请求量：11725
 > * 所有访问均成功
 
 **注意：** 使用本项目的webbench进行压测时，若报错显示webbench命令找不到，将可执行文件webbench删除后，重新编译即可。
-
-更新日志
--------
-- [x] 解决请求服务器上大文件的Bug
-- [x] 增加请求视频文件的页面
-- [x] 解决数据库同步校验内存泄漏
-- [x] 实现非阻塞模式下的ET和LT触发，并完成压力测试
-- [x] 完善`lock.h`中的封装类，统一使用该同步机制
-- [x] 改进代码结构，更新局部变量懒汉单例模式
-- [x] 优化数据库连接池信号量与代码结构
-- [x] 使用RAII机制优化数据库连接的获取与释放
-- [x] 优化代码结构，封装工具类以减少全局变量
-- [x] 编译一次即可，命令行进行个性化测试更加友好
-- [x] main函数封装重构
-- [x] 新增命令行日志开关，关闭日志后更新压力测试结果
-- [x] 改进编译方式，只配置一次SQL信息即可
-- [x] 新增Reactor模式，并完成压力测试
 
 快速运行
 ------------
@@ -300,5 +290,3 @@ Linux下C++轻量级Web服务器
 ```C++
 ./server -p 9007 -l 1 -m 0 -o 1 -s 10 -t 10 -c 1 -a 1
 ```
-**客户端的connect在三次握手的第二个次返回，而服务器端的accept在三次握手的第三次返回。**
-

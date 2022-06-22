@@ -10,18 +10,15 @@
 
 using namespace std;
 
-class Log
-{
+class Log {
 public:
     //C++11以后,使用局部变量懒汉不用加锁
-    static Log *get_instance()
-    {
+    static Log *get_instance() {
         static Log instance;
         return &instance;
     }
 
-    static void *flush_log_thread(void *args)
-    {
+    static void *flush_log_thread(void *args) {
         Log::get_instance()->async_write_log();
     }
     //可选择的参数有日志文件、日志缓冲区大小、最大行数以及最长日志条队列
@@ -34,12 +31,10 @@ public:
 private:
     Log();
     virtual ~Log();
-    void *async_write_log()
-    {
+    void *async_write_log() {
         string single_log;
         //从阻塞队列中取出一个日志string，写入文件
-        while (m_log_queue->pop(single_log))
-        {
+        while (m_log_queue->pop(single_log)) {
             m_mutex.lock();
             fputs(single_log.c_str(), m_fp);
             m_mutex.unlock();
