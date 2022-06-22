@@ -81,7 +81,7 @@ Linux下C++轻量级Web服务器
     + connection字段判断是keep-alive还是close，决定是长连接还是短连接。
     + content-length字段，这里用于读取post请求的消息体长度。
     
-+ CHECK_STATE_CONTENT
++ CHECK_STATE_CONTENT，解析请求体
     + 仅用于解析POST请求，调用parse_content函数解析消息体。
     + 用于保存POST请求消息体，为后面的登陆和注册做准备。
 
